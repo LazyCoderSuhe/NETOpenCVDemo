@@ -1,14 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using NETOpenCVDemo;
+using NETOpenCVDemo.Correction;
 using OpenCvSharp;
 
+#region Imagefilter
+Imagefilter imagefilter = new Imagefilter();
+imagefilter.Remap();
+#endregion
 
 #region ImageHist
-
-ImageHist imageHist = new ImageHist();
-imageHist.Hist();
-//imageHist.EqualizeCompareHist();
-imageHist.ColourImageComparison();
+// ImageHist imageHist = new ImageHist();
+// imageHist.Hist();
+// imageHist.EqualizeCompareHist();
+// imageHist.ColourImageComparison();
 #endregion
 
 
