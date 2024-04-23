@@ -141,29 +141,44 @@ namespace NETOpenCVDemo.Correction
             Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
             Cv2.ImShow("Source", mat);
             Mat mapx = new Mat();
-            Cv2.Resize(mat, mapx, new Size(100, 100)); // 缩放
+            // 缩放的矩阵 = [a 0 0; 0 b 0]
+            Cv2.Resize(mat, mapx, new Size(100, 100)); // 缩放 
             Cv2.ImShow("Resize", mapx);
-            Cv2.Flip(mat, mapx, FlipMode.X); // 翻转
-            Cv2.ImShow("Flip", mapx);
-            Cv2.Rotate(mat, mapx, RotateFlags.Rotate90Clockwise); // 旋转
-            Cv2.ImShow("Rotate", mapx);
-            Cv2.Transpose(mat, mapx); // 转置
-            Cv2.ImShow("Transpose", mapx);
-
-            // 平移 矩阵
+            // 平移 矩阵 = [1 0 x; 0 1 y]
             Mat mat1 = new Mat(2, 3, MatType.CV_32F, new float[] { 1, 0, 100, 0, 1, 100 });
             Cv2.WarpAffine(mat, mapx, mat1, new Size(100, 100));
             Cv2.ImShow("WarpAffine平移", mapx);
+            // 旋转的矩阵 = [cos -sin 0; sin cos 0]
+            // = [a b (1-a)*center.x-b*center.y; -b a b*center.x+(1-a)*center.y]
+            // 合并 = [cos -sin 0; sin cos 0] * [1 0 x; 0 1 y]
+            Mat rotatemat = Cv2.GetRotationMatrix2D(new Point2f(mat.Width / 2, mat.Height / 2), 45, 1);
+            Cv2.WarpAffine(mat, mapx, rotatemat, new Size(100, 100));
+            Cv2.ImShow("Rotate0", mapx);
+            Cv2.Rotate(mat, mapx, RotateFlags.Rotate90Clockwise); // 旋转
+            Cv2.ImShow("Rotate1", mapx);
 
-            // 倾斜
+
+            // 倾斜矩阵 = [1 a 0; b 1 0]
+            // = [1 Cot(a) 0; Cot(a) 1 0]
             Mat mat2 = new Mat(2, 3, MatType.CV_32F, new float[] { 1, 0.5f, 0, 0.5f, 1, 0 });
             Cv2.WarpAffine(mat, mapx, mat2, new Size(100, 100));
             Cv2.ImShow("WarpAffine倾斜", mapx);
-            // 反射
+
+            // 反射矩阵 反射x轴= [-1 0 0; 0 1 0]
+            // 反射y轴= [1 0 0; 0 -1 0]
+            // 反射xy轴= [-1 0 0; 0 -1 0]
             Mat mat3 = new Mat(2, 3, MatType.CV_32F, new float[] { -1, 0, 0, 0, 1, 0 });
             Cv2.WarpAffine(mat, mapx, mat3, new Size(100, 100));
-            Cv2.ImShow("WarpAffine反射", mapx);
+            Cv2.ImShow("WarpAffine反射", mapx); 
+            // 翻转 矩阵 = [-1 0 0; 0 1 0] x轴翻转 与上面的 x轴反射一样
+            Cv2.Flip(mat, mapx, FlipMode.X); // 翻转
+            Cv2.ImShow("Flip", mapx);          
+            Cv2.Transpose(mat, mapx); // 转置
+            Cv2.ImShow("Transpose", mapx);
 
+          
+
+  
             // 透视变换
             Point2f[] src = new Point2f[] { new Point2f(0, 0), new Point2f(mat.Width, 0), new Point2f(0, mat.Height), new Point2f(mat.Width, mat.Height) };
             Point2f[] dst = new Point2f[] { new Point2f(0, 0), new Point2f(mat.Width, 0), new Point2f(0, mat.Height), new Point2f(mat.Width - 100, mat.Height - 100) };

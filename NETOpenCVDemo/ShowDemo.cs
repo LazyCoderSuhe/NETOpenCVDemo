@@ -17,6 +17,7 @@ namespace NETOpenCVDemo
         public void Show(string path, ImreadModes flags = ImreadModes.Color)
         {
             Mat inmat = Cv2.ImRead(path, flags);
+            Cv2.NamedWindow("Input",WindowFlags.FreeRatio);
             Cv2.ImShow("Input", inmat);
             Cv2.WaitKey(0);
             Cv2.DestroyAllWindows();
@@ -35,12 +36,12 @@ namespace NETOpenCVDemo
             Cv2.ImShow("Random32", mat1);
             Cv2.MinMaxLoc(mat1, out double minVal, out double maxVal, out Point minLoc, out Point maxLoc);
 
-            Mat m1 =new Mat();
-            mat1.ConvertTo(m1,MatType.CV_8U, 255.0 / (maxVal - minVal), -minVal * 255.0 / (maxVal - minVal));
+            Mat m1 = new Mat();
+            mat1.ConvertTo(m1, MatType.CV_8U, 255.0 / (maxVal - minVal), -minVal * 255.0 / (maxVal - minVal));
             // mat1.ConvertTo(m1, MatType.CV_8U, 255.0 / (maxVal - minVal), -255.0 / (minVal));
             Cv2.ImShow("ConvertTo", m1);
         }
-      
+
         public void Destroy()
         {
             Cv2.WaitKey(0);

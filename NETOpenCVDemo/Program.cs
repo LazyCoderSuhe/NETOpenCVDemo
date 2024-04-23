@@ -4,8 +4,8 @@ using NETOpenCVDemo.Correction;
 using OpenCvSharp;
 
 #region Imagefilter
-Imagefilter imagefilter = new Imagefilter();
-imagefilter.Remap();
+//Imagefilter imagefilter = new Imagefilter();
+//imagefilter.Remap();
 #endregion
 
 #region ImageHist
@@ -62,8 +62,8 @@ imagefilter.Remap();
 #endregion
 
 #region ShowDemo
-//ShowDemo showDemo = new ShowDemo();
-//showDemo.Show("aa.jpg");
+ShowDemo showDemo = new ShowDemo();
+showDemo.Show("aa.jpg");
 //showDemo.RandmShow();
 //showDemo.Randm32FShow();
 //showDemo.Destroy();
