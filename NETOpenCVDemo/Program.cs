@@ -2,9 +2,37 @@
 using NETOpenCVDemo;
 using NETOpenCVDemo.Correction;
 using OpenCvSharp;
+#region FitImages
+//FitImages fitImages = new FitImages();
+#endregion
+
+#region Correction
+//HightRangeImaging hightRangeImaging = new HightRangeImaging();
+//hightRangeImaging.Hdr();
+//hightRangeImaging.Tonemap();
+#endregion
+
+#region ColorSpace
+//ColorSpace colorSpace = new ColorSpace();
+//colorSpace.ColorTransfer();
+#endregion
+#region ImageDenoising
+//ImageDenoising imageDenoising = new ImageDenoising();
+//imageDenoising.ImgDenoise();
+#endregion
+
+#region ImageRepair
+//ImageRepair imageRepair = new ImageRepair();
+//imageRepair.Repair();
+#endregion
 
 #region Imagefilter
-//Imagefilter imagefilter = new Imagefilter();
+Imagefilter imagefilter = new Imagefilter();
+imagefilter.EdgePreservingFilter();
+imagefilter.DetailEnhance();
+imagefilter.PencilSketch();
+imagefilter.Stylization();
+
 //imagefilter.Remap();
 #endregion
 
@@ -62,8 +90,8 @@ using OpenCvSharp;
 #endregion
 
 #region ShowDemo
-ShowDemo showDemo = new ShowDemo();
-showDemo.Show("aa.jpg");
+//ShowDemo showDemo = new ShowDemo();
+//showDemo.Show("aa.jpg");
 //showDemo.RandmShow();
 //showDemo.Randm32FShow();
 //showDemo.Destroy();
@@ -72,3 +100,24 @@ Cv2.WaitKey(0);
 Console.ReadKey();
 
 
+// 创建 递归方法遍历子文件及内容
+static void GetFiles(string path)
+{
+    DirectoryInfo directoryInfo = new DirectoryInfo(path);
+    if (!directoryInfo.Exists)
+    {
+        Console.WriteLine("目录不存在");
+        return;
+    }
+    DirectoryInfo[] directoryInfos = directoryInfo.GetDirectories();
+    foreach (var item in directoryInfos)
+    {
+        Console.WriteLine(item.FullName);
+        GetFiles(item.FullName);
+    }
+    FileInfo[] fileInfos = directoryInfo.GetFiles();
+    foreach (var item in fileInfos)
+    {
+        Console.WriteLine(item.FullName);
+    }
+}

@@ -169,16 +169,16 @@ namespace NETOpenCVDemo.Correction
             // 反射xy轴= [-1 0 0; 0 -1 0]
             Mat mat3 = new Mat(2, 3, MatType.CV_32F, new float[] { -1, 0, 0, 0, 1, 0 });
             Cv2.WarpAffine(mat, mapx, mat3, new Size(100, 100));
-            Cv2.ImShow("WarpAffine反射", mapx); 
+            Cv2.ImShow("WarpAffine反射", mapx);
             // 翻转 矩阵 = [-1 0 0; 0 1 0] x轴翻转 与上面的 x轴反射一样
             Cv2.Flip(mat, mapx, FlipMode.X); // 翻转
-            Cv2.ImShow("Flip", mapx);          
+            Cv2.ImShow("Flip", mapx);
             Cv2.Transpose(mat, mapx); // 转置
             Cv2.ImShow("Transpose", mapx);
 
-          
 
-  
+
+
             // 透视变换
             Point2f[] src = new Point2f[] { new Point2f(0, 0), new Point2f(mat.Width, 0), new Point2f(0, mat.Height), new Point2f(mat.Width, mat.Height) };
             Point2f[] dst = new Point2f[] { new Point2f(0, 0), new Point2f(mat.Width, 0), new Point2f(0, mat.Height), new Point2f(mat.Width - 100, mat.Height - 100) };
@@ -187,6 +187,53 @@ namespace NETOpenCVDemo.Correction
             Cv2.ImShow("WarpPerspective透视变换", mapx);
 
 
+        }
+
+        /// <summary>
+        /// 非真是感 EdgePreservingFilter
+        /// </summary>
+        /// <param name="edgePreservingMethods"></param>
+        public void EdgePreservingFilter(EdgePreservingMethods edgePreservingMethods = EdgePreservingMethods.NormconvFilter)
+        {
+            Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            Cv2.ImShow("Source", mat);
+            Mat mapx = new Mat();
+            Cv2.EdgePreservingFilter(mat, mapx, edgePreservingMethods, 60, 0.4f);
+            Cv2.ImShow("EdgePreservingFilter", mapx);
+        }
+        /// <summary>
+        /// 非真是感 DetailEnhance
+        /// </summary>
+        public void DetailEnhance()
+        {
+            Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            Cv2.ImShow("Source", mat);
+            Mat mapx = new Mat();
+            Cv2.DetailEnhance(mat, mapx, 10, 0.15f);
+            Cv2.ImShow("DetailEnhance", mapx);
+        }
+        /// <summary>
+        /// 非真是感 PencilSketch
+        /// </summary>
+        public void PencilSketch()
+        {
+            Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            Cv2.ImShow("Source", mat);
+            Mat mapx = new Mat();
+            Mat dump = new Mat();
+            Cv2.PencilSketch(mat, mapx, dump, 10, 0.15f, 0.1f);
+            Cv2.ImShow("PencilSketch", mapx);
+        }
+        /// <summary>
+        /// 非真是感 Stylization
+        /// </summary>
+        public void Stylization()
+        {
+            Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            Cv2.ImShow("Source", mat);
+            Mat mapx = new Mat();
+            Cv2.Stylization(mat, mapx, 60, 0.45f);
+            Cv2.ImShow("Stylization", mapx);
         }
         #endregion
     }
