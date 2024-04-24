@@ -52,10 +52,86 @@ namespace NETOpenCVDemo
             Cv2.ImShow("Set", rmat);
         }
 
+        public void ImageAddMat()
+        {
+            Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            Mat mat1 = Cv2.ImRead("bb.jpg", ImreadModes.Color);
+            mat1 = mat1.Resize(mat.Size());
+            Mat remat = new Mat();
+            Cv2.Add(mat, mat1, remat);
+            Cv2.ImShow("ImageAdd", remat);
+        }
+        public void ImageMathScalar(MathMethed mathMethed = MathMethed.Div)
+        {
+            Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            Cv2.ImShow("Source", mat);
+            Scalar scalar = new Scalar(4, 1, 1);
+            Mat remat = new Mat();
+            switch (mathMethed)
+            {
+                case MathMethed.Add:
+                    Cv2.Add(mat, scalar, remat);
+                    break;
+                case MathMethed.Sub:
+                    Cv2.Subtract(mat, scalar, remat);
+                    break;
+                case MathMethed.Mul:
+                    Cv2.Multiply(mat, scalar, remat);
+                    break;
+                case MathMethed.Div:
+                    Cv2.Divide(mat, scalar, remat);
+                    break;
+                default:
+                    break;
+            }
+          
+            Cv2.ImShow("ImageAdd", remat);
+        }
+
+
+        public void ImageMathMat(MathMethed mathMethed = MathMethed.Sub)
+        {
+            Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            Cv2.ImShow("Source", mat);
+            Mat mat1 = Cv2.ImRead("bb.jpg", ImreadModes.Color);
+            mat1 = mat1.Resize(mat.Size());
+            Mat remat = new Mat();
+            switch (mathMethed)
+            {
+                case MathMethed.Add:
+                    Cv2.Add(mat, mat1, remat);
+                    break;
+                case MathMethed.Sub:
+                    Cv2.Subtract(mat, mat1, remat);
+                    break;
+                case MathMethed.Mul:
+                    Cv2.Multiply(mat, mat1, remat);
+                    break;
+                case MathMethed.Div:
+                    Cv2.Divide(mat, mat1, remat);
+                    break;
+                default:
+                    break;
+            }
+
+            Cv2.ImShow("ImageAdd", remat);
+        }
+
+
+
         public void Distroy()
         {
             Cv2.WaitKey(0);
             Cv2.DestroyAllWindows();
         }
     }
+    public enum MathMethed
+    {
+        Add,
+        Sub,
+        Mul,
+        Div
+
+    }
+
 }

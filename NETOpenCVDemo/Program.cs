@@ -27,11 +27,11 @@ using OpenCvSharp;
 #endregion
 
 #region Imagefilter
-Imagefilter imagefilter = new Imagefilter();
-imagefilter.EdgePreservingFilter();
-imagefilter.DetailEnhance();
-imagefilter.PencilSketch();
-imagefilter.Stylization();
+//Imagefilter imagefilter = new Imagefilter();
+//imagefilter.EdgePreservingFilter();
+//imagefilter.DetailEnhance();
+//imagefilter.PencilSketch();
+//imagefilter.Stylization();
 
 //imagefilter.Remap();
 #endregion
@@ -50,9 +50,9 @@ imagefilter.Stylization();
 #endregion
 
 #region ImageMath
-//ImageMath imageMath = new ImageMath();
+ImageMath imageMath = new ImageMath();
 //imageMath.ImageMarkMath();
-
+imageMath.ImageMathMat();   
 #endregion
 #region MatBaseAction
 //MatBaseAction matBaseAction = new MatBaseAction();
@@ -99,25 +99,3 @@ imagefilter.Stylization();
 Cv2.WaitKey(0);
 Console.ReadKey();
 
-
-// 创建 递归方法遍历子文件及内容
-static void GetFiles(string path)
-{
-    DirectoryInfo directoryInfo = new DirectoryInfo(path);
-    if (!directoryInfo.Exists)
-    {
-        Console.WriteLine("目录不存在");
-        return;
-    }
-    DirectoryInfo[] directoryInfos = directoryInfo.GetDirectories();
-    foreach (var item in directoryInfos)
-    {
-        Console.WriteLine(item.FullName);
-        GetFiles(item.FullName);
-    }
-    FileInfo[] fileInfos = directoryInfo.GetFiles();
-    foreach (var item in fileInfos)
-    {
-        Console.WriteLine(item.FullName);
-    }
-}
