@@ -1,7 +1,35 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using NETOpenCVDemo;
 using NETOpenCVDemo.Correction;
+using NETOpenCVDemo.CVTools;
 using OpenCvSharp;
+using System.Text.RegularExpressions;
+
+//int i = 0;
+// WEBP 转成 Png
+//Directory.GetFiles("./Source/", "*.webp").ToList().ForEach(f =>
+//{
+//    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+//    using (var img = new Mat(f, ImreadModes.Unchanged))
+//    {
+//        img.SaveImage(Regex.Replace(f, ".webp", ".png"));
+//    }
+//    i++;
+//    Console.WriteLine($"处理 第{i}: {f}");
+//    File.Delete(f);
+//});
+
+#region ImageTableMap
+
+ImageTableMap imageTableMap = new ImageTableMap();
+//imageTableMap.TableMap();
+imageTableMap.TableMapLUT();
+#endregion
+
+#region ToolsDemo
+//ToolsDemo toolsDemo = new ToolsDemo();
+//toolsDemo.Tools();
+#endregion
 #region FitImages
 //FitImages fitImages = new FitImages();
 #endregion
@@ -52,7 +80,7 @@ using OpenCvSharp;
 #region ImageMath
 ImageMath imageMath = new ImageMath();
 //imageMath.ImageMarkMath();
-imageMath.ImageMathMat();   
+//imageMath.ImageMathMat();   
 #endregion
 #region MatBaseAction
 //MatBaseAction matBaseAction = new MatBaseAction();
@@ -96,6 +124,12 @@ imageMath.ImageMathMat();
 //showDemo.Randm32FShow();
 //showDemo.Destroy();
 #endregion
+
+
+
+
+
+
+
 Cv2.WaitKey(0);
 Console.ReadKey();
-
