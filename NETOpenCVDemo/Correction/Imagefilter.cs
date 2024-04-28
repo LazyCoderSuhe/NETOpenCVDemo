@@ -262,16 +262,20 @@ namespace NETOpenCVDemo.Correction
             Mat mapx1 = new Mat();
             Cv2.BitwiseNot(mapx, mapx1);
             Cv2.ImShow("BitwiseNot目标区域取反", mapx1);
-            Mat mapx2 = new Mat();           
+            Mat mapx2 = new Mat();
             Cv2.BitwiseAnd(mat, mat, mapx2, mapx1);
             Cv2.ImShow("BitwiseAnd 保留原图目标", mapx2);
             Mat mapx3 = new Mat();
             Cv2.BitwiseOr(mat, new Scalar(0, 255, 0), mapx3, mapx);
             Cv2.ImShow("BitwiseOr ", mapx3);
             Mat bgBlue = mat.Clone();
+            Mat bgmat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            bgmat = bgmat.Resize(bgBlue.Size());
             bgBlue.SetTo(new Scalar(255, 40, 40));
             Cv2.CopyTo(mat, bgBlue, mapx1);
-            Cv2.ImShow("CopyTo", bgBlue);
+            Cv2.ImShow("CopyTobgBlue", bgBlue);
+            Cv2.CopyTo(mat, bgmat, mapx1);
+            Cv2.ImShow("CopyTo", bgmat);
         }
 
         #endregion
