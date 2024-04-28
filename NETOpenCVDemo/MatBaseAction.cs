@@ -14,7 +14,9 @@ namespace NETOpenCVDemo
         {
             mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
         }
-
+        /// <summary>
+        /// Mat 的通道分离与合并
+        /// </summary>
         public void Action()
         {
             Cv2.ImShow("Source", mat);
@@ -32,6 +34,7 @@ namespace NETOpenCVDemo
             Cv2.ImShow("Flip", flip);
             // 分割通道
             Mat[] channels = Cv2.Split(mat);//BGR
+            channels[0].SetTo(0);
             Cv2.ImShow("B", channels[0]);
             Cv2.ImShow("G", channels[1]);
             Cv2.ImShow("R", channels[2]);
@@ -56,6 +59,20 @@ namespace NETOpenCVDemo
             Console.WriteLine($"IsEmpty:{mat.Empty()}");
 
         }
+        /// <summary>
+        ///  通道混合
+        /// </summary>
+        public void ActionMixChannels()
+        {
+            Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            Cv2.ImShow("Source", mat);
+            Mat dst = mat.Clone();
+            // 通道混合 BGR  ->GBR
+            var change = new int[] { 0, 2, 1, 1, 2, 0 };
+            Cv2.MixChannels([mat],[dst], change);
+            Cv2.ImShow("MixChannels", dst);
+        }
+
         public void Distroy()
         {
             Cv2.WaitKey(0);

@@ -19,6 +19,7 @@ namespace NETOpenCVDemo
             //mat1= mat1.Resize(mat.Size());
             var mat2 = mat[new Rect(100, 100, mat1.Size().Width, mat1.Size().Height)];
             Mat remat = 0.5 * mat2 + mat1 * 0.5;
+           
             mat[new Rect(100, 100, mat1.Size().Width, mat1.Size().Height)] = remat;
             Cv2.ImShow("ImageMathMultiAndAdd", mat);
         }

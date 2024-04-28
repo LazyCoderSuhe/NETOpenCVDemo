@@ -21,9 +21,9 @@ using System.Text.RegularExpressions;
 
 #region ImageTableMap
 
-ImageTableMap imageTableMap = new ImageTableMap();
+//ImageTableMap imageTableMap = new ImageTableMap();
 //imageTableMap.TableMap();
-imageTableMap.TableMapLUT();
+//imageTableMap.TableMapLUT();
 #endregion
 
 #region ToolsDemo
@@ -55,12 +55,12 @@ imageTableMap.TableMapLUT();
 #endregion
 
 #region Imagefilter
-//Imagefilter imagefilter = new Imagefilter();
+Imagefilter imagefilter = new Imagefilter();
 //imagefilter.EdgePreservingFilter();
 //imagefilter.DetailEnhance();
 //imagefilter.PencilSketch();
 //imagefilter.Stylization();
-
+imagefilter.GreenInRangeRepalceDemo();
 //imagefilter.Remap();
 #endregion
 
@@ -85,6 +85,7 @@ ImageMath imageMath = new ImageMath();
 #region MatBaseAction
 //MatBaseAction matBaseAction = new MatBaseAction();
 //matBaseAction.Action();
+//matBaseAction.ActionMixChannels();
 #endregion
 
 #region PixelRead

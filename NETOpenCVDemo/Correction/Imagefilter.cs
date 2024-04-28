@@ -235,6 +235,45 @@ namespace NETOpenCVDemo.Correction
             Cv2.Stylization(mat, mapx, 60, 0.45f);
             Cv2.ImShow("Stylization", mapx);
         }
+
+        /// <summary>
+        /// 范围控件选择
+        /// </summary>
+        public void InRange()
+        {
+            Mat mat = Cv2.ImRead("aa.jpg", ImreadModes.Color);
+            Cv2.ImShow("Source", mat);
+            Mat hsv = new Mat();
+            Cv2.CvtColor(mat, hsv, ColorConversionCodes.BGR2HSV);
+            Mat mapx = new Mat();
+            Cv2.InRange(hsv, new Scalar(35, 43, 46), new Scalar(77, 255, 255), mapx);
+            Cv2.ImShow("InRange", mapx);
+        }
+
+        public void GreenInRangeRepalceDemo()
+        {
+            Mat mat = Cv2.ImRead("aaa.jpg", ImreadModes.Color);
+            Cv2.ImShow("Source", mat);
+            Mat hsv = new Mat();
+            Cv2.CvtColor(mat, hsv, ColorConversionCodes.BGR2HSV);
+            Mat mapx = new Mat();
+            Cv2.InRange(hsv, new Scalar(35, 43, 46), new Scalar(77, 255, 255), mapx);
+            Cv2.ImShow("InRange黑色目标区域", mapx);
+            Mat mapx1 = new Mat();
+            Cv2.BitwiseNot(mapx, mapx1);
+            Cv2.ImShow("BitwiseNot目标区域取反", mapx1);
+            Mat mapx2 = new Mat();           
+            Cv2.BitwiseAnd(mat, mat, mapx2, mapx1);
+            Cv2.ImShow("BitwiseAnd 保留原图目标", mapx2);
+            Mat mapx3 = new Mat();
+            Cv2.BitwiseOr(mat, new Scalar(0, 255, 0), mapx3, mapx);
+            Cv2.ImShow("BitwiseOr ", mapx3);
+            Mat bgBlue = mat.Clone();
+            bgBlue.SetTo(new Scalar(255, 40, 40));
+            Cv2.CopyTo(mat, bgBlue, mapx1);
+            Cv2.ImShow("CopyTo", bgBlue);
+        }
+
         #endregion
     }
 }
