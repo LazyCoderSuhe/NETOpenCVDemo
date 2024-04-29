@@ -19,6 +19,11 @@ using System.Text.RegularExpressions;
 //    File.Delete(f);
 //});
 
+#region ImageGeometry
+ImageGeometry imageGeometry = new ImageGeometry();
+imageGeometry.Draw();
+#endregion
+
 #region ImageTableMap
 
 //ImageTableMap imageTableMap = new ImageTableMap();
@@ -60,7 +65,7 @@ Imagefilter imagefilter = new Imagefilter();
 //imagefilter.DetailEnhance();
 //imagefilter.PencilSketch();
 //imagefilter.Stylization();
-imagefilter.GreenInRangeRepalceDemo();
+//imagefilter.GreenInRangeRepalceDemo();
 //imagefilter.Remap();
 #endregion
 
