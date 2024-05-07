@@ -152,7 +152,15 @@ namespace NETOpenCVDemo.Correction
             // = [a b (1-a)*center.x-b*center.y; -b a b*center.x+(1-a)*center.y]
             // 合并 = [cos -sin 0; sin cos 0] * [1 0 x; 0 1 y]
             Mat rotatemat = Cv2.GetRotationMatrix2D(new Point2f(mat.Width / 2, mat.Height / 2), 45, 1);
-            Cv2.WarpAffine(mat, mapx, rotatemat, new Size(100, 100));
+            double cos = Math.Abs(rotatemat.At<double>(0, 0));
+            double sin = Math.Abs(rotatemat.At<double>(0, 1));
+            int newWidth = (int)(mat.Width * cos + mat.Height * sin);
+            int newHeight = (int)(mat.Width * sin + mat.Height * cos);
+            rotatemat.Set<double>(0, 2, rotatemat.At<double>(0, 2) + (newWidth - mat.Width) / 2);   
+            rotatemat.Set<double>(1, 2, rotatemat.At<double>(1, 2) + (newHeight - mat.Height) / 2);
+
+
+            Cv2.WarpAffine(mat, mapx, rotatemat, new Size(newWidth, newHeight), borderValue: new Scalar(255, 0, 0));
             Cv2.ImShow("Rotate0", mapx);
             Cv2.Rotate(mat, mapx, RotateFlags.Rotate90Clockwise); // 旋转
             Cv2.ImShow("Rotate1", mapx);

@@ -2,6 +2,7 @@
 using NETOpenCVDemo;
 using NETOpenCVDemo.Correction;
 using NETOpenCVDemo.CVTools;
+using NETOpenCVDemo.DNN;
 using OpenCvSharp;
 using System.Text.RegularExpressions;
 
@@ -18,10 +19,18 @@ using System.Text.RegularExpressions;
 //    Console.WriteLine($"处理 第{i}: {f}");
 //    File.Delete(f);
 //});
+#region FaceShow
+FaceDetector faceShow = new FaceDetector();
+faceShow.DetectorFace();
+#endregion
 
+#region ImageNormalize
+ImageNormalize imageNormalize = new ImageNormalize();
+//imageNormalize.Normolize();
+#endregion
 #region ImageGeometry
-ImageGeometry imageGeometry = new ImageGeometry();
-imageGeometry.Draw();
+//ImageGeometry imageGeometry = new ImageGeometry();
+//imageGeometry.Draw();
 #endregion
 
 #region ImageTableMap
@@ -32,8 +41,8 @@ imageGeometry.Draw();
 #endregion
 
 #region ToolsDemo
-//ToolsDemo toolsDemo = new ToolsDemo();
-//toolsDemo.Tools();
+ToolsDemo toolsDemo = new ToolsDemo();
+//toolsDemo.ToolsWithOnMouse();
 #endregion
 #region FitImages
 //FitImages fitImages = new FitImages();
@@ -66,7 +75,7 @@ Imagefilter imagefilter = new Imagefilter();
 //imagefilter.PencilSketch();
 //imagefilter.Stylization();
 //imagefilter.GreenInRangeRepalceDemo();
-//imagefilter.Remap();
+imagefilter.Remap();
 #endregion
 
 #region ImageHist
